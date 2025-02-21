@@ -40,7 +40,9 @@ class Reader:
 
           crops.append(Crop([[box[0], box[1]], [box[2], box[3]]], img=cropped))
       crops = sorted(crops)
-      for crop in crops:
-          text += self.recognizer.run(crop.img) + ' '
+      for crop_num in range(len(crops)):
+          word = self.recognizer.run(crops[crop_num].img)
+          crops[crop_num].label = word
+          text += word + ' '
 
       return text, crops
